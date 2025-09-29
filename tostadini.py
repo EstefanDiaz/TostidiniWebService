@@ -1,5 +1,5 @@
 from flask import Flask
-import os  
+import os
 
 # Inicialización de la aplicación Flask
 app = Flask(__name__)
