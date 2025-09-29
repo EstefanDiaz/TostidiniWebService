@@ -1,5 +1,5 @@
 from flask import Flask
-import os
+import os 
 
 # Inicialización de la aplicación Flask
 app = Flask(__name__)
@@ -48,7 +48,8 @@ def home():
         <div class="max-w-xl w-full bg-white shadow-2xl rounded-2xl p-8 md:p-10 text-center transform transition duration-500 hover:scale-[1.02]">
             
             <!-- Título principal con estilo dramático -->
-            <h1 class="text-5xl md:text-6xl font-extrabold text-tostidini-red mb-4 tracking-tight leading-tight">
+            <!-- FIX: Se añade text-center explícitamente al h1 para asegurar el centrado del span block -->
+            <h1 class="text-5xl md:text-6xl font-extrabold text-tostidini-red mb-4 tracking-tight leading-tight text-center">
                 Bienvenidos al 
                 <span class="block text-tostidini-orange mt-1">TostidiniWebServicini</span>
             </h1>
