@@ -51,7 +51,7 @@ def home():
             <!-- FIX: Se añade text-center explícitamente al h1 para asegurar el centrado del span block -->
             <h1 class="text-5xl md:text-6xl font-extrabold text-tostidini-red mb-4 tracking-tight leading-tight text-center">
                 Bienvenidos al 
-                <span class="block text-tostidini-orange mt-1">TostidiniWebServicini</span>
+                <span class="block text-tostidini-orange mt-1">TostidiniWeb</span>
             </h1>
 
             <!-- Línea separadora estética -->
@@ -63,11 +63,6 @@ def home():
             </h2>
             <p class="text-md text-gray-500 mt-1">
                 Matrícula: 22031466
-            </p>
-
-            <!-- Pequeño mensaje de ánimo -->
-            <p class="mt-8 text-sm text-gray-400">
-                ¡Servicio web corriendo con éxito!
             </p>
         </div>
 
