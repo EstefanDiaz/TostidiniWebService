@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import os 
 
 app = Flask(__name__)
@@ -7,7 +7,13 @@ app = Flask(__name__)
 def home():
     nombre = None
     if request.method == "POST":
-        nombre = request.form.get("nombre")  # Recibe el nombre desde el formulario
+        # Primero intentamos obtener desde formulario
+        nombre = request.form.get("nombre")
+
+        # Si no vino en form, probamos con JSON
+        if not nombre and request.is_json:
+            data = request.get_json()
+            nombre = data.get("nombre")
 
     return f"""
     <!DOCTYPE html>
@@ -65,6 +71,22 @@ def home():
     </body>
     </html>
     """
+
+# Nueva ruta JSON
+@app.route("/json", methods=["POST"])
+def json_endpoint():
+    if request.is_json:
+        data = request.get_json()
+        nombre = data.get("nombre", "invitado")
+        return jsonify({
+            "mensaje": f"¡Hola, {nombre}!",
+            "estado": "éxito"
+        })
+    else:
+        return jsonify({
+            "error": "El body debe ser JSON con un campo 'nombre'"
+        }), 400
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
