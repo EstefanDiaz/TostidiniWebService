@@ -6,15 +6,6 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def home():
     nombre = None
-    if request.method == "POST":
-        # Primero intentamos obtener desde formulario
-        nombre = request.form.get("nombre")
-
-        # Si no vino en form, probamos con JSON
-        if not nombre and request.is_json:
-            data = request.get_json()
-            nombre = data.get("nombre")
-
     return f"""
     <!DOCTYPE html>
     <html lang="es">
@@ -55,7 +46,7 @@ def home():
             <div class="w-24 h-1 bg-tostidini-orange mx-auto my-6 rounded-full"></div>
 
             {"<h2 class='text-2xl font-bold text-tostidini-orange'>¡Hola, " + nombre + "!</h2>" if nombre else """
-            <form method="POST" class="mt-4">
+            <form action="/json" method="GET" class="mt-4">
                 <label class="block mb-2 text-gray-700 text-lg">Ingresa tu nombre:</label>
                 <input type="text" name="nombre" required 
                     class="w-full p-2 border-2 border-tostidini-orange rounded-lg focus:outline-none focus:ring-2 focus:ring-tostidini-red">
@@ -73,19 +64,13 @@ def home():
     """
 
 # Nueva ruta JSON
-@app.route("/json", methods=["POST"])
-def json_endpoint():
-    if request.is_json:
-        data = request.get_json()
-        nombre = data.get("nombre", "invitado")
+@app.route("/json",)
+def json_response():
+        nombre = request.args.get("nombre","nada recibido")
         return jsonify({
             "mensaje": f"¡Hola, {nombre}!",
             "estado": "éxito"
         })
-    else:
-        return jsonify({
-            "error": "El body debe ser JSON con un campo 'nombre'"
-        }), 400
 
 
 if __name__ == "__main__":
